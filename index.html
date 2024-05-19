@@ -18,13 +18,18 @@
   <body>
     <button id="add-task" onclick="addTask()">Add Task</button>
     <div>
-        <form action="POST" id="add-task-form">
+        <form action="POST" id="add-task-form" onsubmit="createOnSubmit(event)">
             <input type="text" name="task-title" id="task-title">
-            <input type="text" name="task-due" id="task-due">
+            <input type="date" name="task-due" id="task-due">
             <input type="text" name="task-desc" id="task-desc">
             <input type="submit" value="task-submit">
         </form>
+
+        <section id="todo-sect">
+
+        </section>
     </div>
     <script src="./assets/js/logic.js"></script>
+    <script src="./assets/js/utils.js"></script>
   </body>
 </html>
