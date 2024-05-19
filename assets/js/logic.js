@@ -2,8 +2,10 @@
 const task_form = $("#add-task-form");
 const todo_sect = $("#todo-sect");
 
-// Show hidden form if pressed
-function addTask(e) {
+/**
+ * Show hidden form if pressed
+ */
+function addTask() {
 
     const is_visible = task_form.is("visible");
 
@@ -19,7 +21,10 @@ function addTask(e) {
         {"name": "task-due", "value": ""},   
         {"name": "task-desc", "value": ""} ]
 */
-
+/**
+ * This function handles submissions in the task form
+ * @param {event} e 
+ */
 function createOnSubmit(e) {
     e.preventDefault();
 
@@ -32,8 +37,14 @@ function createOnSubmit(e) {
     console.log(isValid);
     
     if(isValid.val) {
-        //todo_sect.empty();
-        todo_sect.append("<div>").text(title.value);
+        // TODO: Add it to localstorage
+        let $valDiv = $('<div>').text(title.value);
+        let $dueDiv = $('<div>').text(due.value);
+        let $desDiv = $('<div>').text(desc.value);
+
+        todo_sect.append($valDiv);
+        todo_sect.append($dueDiv);
+        todo_sect.append($desDiv);
     } else {
         if(isValid.obj == "")
             alert("Form input cannot be empty");
