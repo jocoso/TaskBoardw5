@@ -19,7 +19,6 @@ const checkValidity = (...args) => {
         
     });
     
-    
     return output;
 
 }
