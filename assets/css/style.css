@@ -1,0 +1,7 @@
+#add-task-form {
+    visibility:hidden;
+    position: fixed;
+    float:right;
+    display: flex;
+    flex-direction: column;
+}
