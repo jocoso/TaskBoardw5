@@ -15,6 +15,22 @@ function addTask() {
  
 }
 
+function injectSubmissions() {
+    const submitArray = JSON.parse(localStorage.getItem("tasks"));
+
+    if(submitArray && typeof submitArray === "object") {
+        submitArray.forEach((item) => {
+
+            const $title = $('<div>').text(item.title + "\n" + item.due + "\n" + item.desc);
+            todo_sect.append($title);
+            
+        
+        });
+    }
+
+    
+}
+
 /* 
     [   
         {"name": "task-title", "value": ""},   
@@ -33,26 +49,19 @@ function createOnSubmit(e) {
 
 
     const isValid = checkValidity(title.value, due.value, desc.value);
-
-    console.log(isValid);
     
     if(isValid.val) {
         // TODO: Add it to localstorage
-        let $valDiv = $('<div>').text(title.value);
-        let $dueDiv = $('<div>').text(due.value);
-        let $desDiv = $('<div>').text(desc.value);
-
-        todo_sect.append($valDiv);
-        todo_sect.append($dueDiv);
-        todo_sect.append($desDiv);
+        addToStorage("tasks", {'title': title.value, 'due': due.value, 'desc': desc.value});
     } else {
         if(isValid.obj == "")
             alert("Form input cannot be empty");
-
-        console.log(isValid);
     }
     
     task_form.css("visibility", "hidden");
-
-   
+    window.location.reload();
 }
+
+$(document).ready(() => {
+    injectSubmissions();
+});

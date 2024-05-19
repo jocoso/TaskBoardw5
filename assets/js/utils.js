@@ -1,3 +1,9 @@
+/**
+ * Very barebones user data validation
+ * @param  {...any} args items to check 
+ * @returns {Object} output returns an object. This object contains a boolean that tell if data is valid or not.
+ * if it is offensive, the function returns the offending object.
+ */
 const checkValidity = (...args) => {
     
     const output = {"val": true};
@@ -17,3 +23,16 @@ const checkValidity = (...args) => {
     return output;
 
 }
+
+
+const addToStorage = (name, object) => {
+    let tasksArray = JSON.parse(localStorage.getItem(name));
+    
+    if(tasksArray === null) {
+        tasksArray = new Array();
+    } 
+
+    tasksArray.push(object);
+    localStorage.setItem(name, JSON.stringify(tasksArray));
+
+};
