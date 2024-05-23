@@ -1,6 +1,8 @@
 
 const task_form = $("#add-task-form");
-const todo_sect = $("#todo-sect");
+const todo_list = $("#todo-list > ul");
+const done_list = $("#done-list");
+const inprogress_list = $("#inprogress-list");
 
 /**
  * Show hidden form if pressed
@@ -21,8 +23,9 @@ function injectSubmissions() {
     if(submitArray && typeof submitArray === "object") {
         submitArray.forEach((item) => {
 
-            const $title = $('<div>').text(item.title + "\n" + item.due + "\n" + item.desc);
-            todo_sect.append($title);
+            const $task = $('<li>').text(item.title + "\n" + item.due + "\n" + item.desc);
+            $task.addClass('draggable-item');
+            todo_list.append($task);
             
         
         });
