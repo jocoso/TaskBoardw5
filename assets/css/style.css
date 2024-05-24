@@ -18,9 +18,13 @@
     background-color: lightgray;
 }
 
-#todo-list > ul {
+
+
+#todo-list > ul, #inprogress-list > ul, #done-list > ul {
     width: 100%;
     display: grid;
+    border: 1px dashed black;
+    min-height: 10vh;
 }
 
 .draggable-item {
