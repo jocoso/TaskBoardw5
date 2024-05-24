@@ -5,3 +5,32 @@
     display: flex;
     flex-direction: column;
 }
+
+#all-tasks {
+    display: flex;
+    flex-direction: row;
+}
+
+#all-tasks > section {
+    margin: 10px;
+    height: 90vh;
+    width: 70vw;
+    background-color: lightgray;
+}
+
+
+
+#todo-list > ul, #inprogress-list > ul, #done-list > ul {
+    width: 100%;
+    display: grid;
+    border: 1px dashed black;
+    min-height: 10vh;
+}
+
+.draggable-item {
+    list-style: none;
+    background-color: lightblue;
+    padding: 10px;
+    width: 100%;
+    margin: 0px;
+}

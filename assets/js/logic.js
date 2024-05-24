@@ -1,6 +1,9 @@
 
 const task_form = $("#add-task-form");
-const todo_sect = $("#todo-sect");
+const todo_list = $("#todo-list > ul");
+const done_list = $("#done-list > ul");
+const inprogress_list = $("#inprogress-list > ul");
+const submitArray = JSON.parse(localStorage.getItem("tasks"));
 
 /**
  * Show hidden form if pressed
@@ -15,17 +18,40 @@ function addTask() {
  
 }
 
+function getLocalData(name) {
+    return JSON.parse(localStorage.getItem(name));
+}
+
+function updateLocalData(name, newdata) {
+    return localStorage.setItem(name, JSON.stringify(newdata))
+}
+
 function injectSubmissions() {
-    const submitArray = JSON.parse(localStorage.getItem("tasks"));
+    
 
     if(submitArray && typeof submitArray === "object") {
-        submitArray.forEach((item) => {
+        submitArray.forEach((item, idx) => {
 
-            const $title = $('<div>').text(item.title + "\n" + item.due + "\n" + item.desc);
-            todo_sect.append($title);
-            
-        
+            const $task = $('<li>').text(item.title + "\n" + item.due + "\n" + item.desc);
+            $task.addClass('ui-widget-content ui-corner-tr draggable-item');
+            $task.attr('id', idx);
+
+            switch(item.id) {
+                case 'todo':
+                    todo_list.append($task);
+                    break;
+                case 'inprogress':
+                    inprogress_list.append($task);
+                    break
+                case 'done':
+                    done_list.append($task);
+                    break;
+                default:
+                    todo_list.append($task);
+                    break;
+            }
         });
+
     }
 
     
@@ -52,7 +78,7 @@ function createOnSubmit(e) {
     
     if(isValid.val) {
         // TODO: Add it to localstorage
-        addToStorage("tasks", {'title': title.value, 'due': due.value, 'desc': desc.value});
+        addToStorage("tasks", {'title': title.value, 'due': due.value, 'desc': desc.value, 'id': 'todo-list'});
     } else {
         if(isValid.obj == "")
             alert("Form input cannot be empty");
